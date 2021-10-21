@@ -27,7 +27,13 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "import/no-anonymous-default-export": ["error", {
+        "allowArray": true,
+        "allowObject": true
+      }]
+    }
   },
   "prettier": {
     "printWidth": 100,

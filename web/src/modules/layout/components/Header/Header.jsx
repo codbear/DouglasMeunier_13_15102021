@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { ROUTES } from '../../../../router';
+import { TYPOGRAPHY, Typography } from '../../../theme';
 import argentBankLogo from '../../images/argentBankLogo.png';
 
 const MainNav = styled.nav`
@@ -40,7 +41,9 @@ const Header = () => (
   <MainNav>
     <NavLogo to={ROUTES.HOME}>
       <img src={argentBankLogo} alt="" />
-      <h1 className="sr-only">Argent Bank</h1>
+      <Typography variant={TYPOGRAPHY.H1} srOnly>
+        Argent Bank
+      </Typography>
     </NavLogo>
     <div>
       <NavItem to={ROUTES.AUTH.SIGN_IN}>

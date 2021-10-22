@@ -14,7 +14,7 @@ const SignInCard = styled.section`
   padding: 2rem;
 `;
 
-const SignInScreen = () => {
+const LoginScreen = () => {
   const initialValues = {
     username: '',
     password: '',
@@ -48,4 +48,4 @@ const SignInScreen = () => {
   );
 };
 
-export default SignInScreen;
+export default LoginScreen;

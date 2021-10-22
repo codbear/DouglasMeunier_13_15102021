@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import { TYPOGRAPHY, Typography } from '../../theme';
 import AccountCard from '../components/AccountCard';
 
-const AccountsScreen = () => {
+const ProfileScreen = () => {
   const currentUser = {
     firstName: 'Tony',
     lastName: 'Stark',
@@ -34,4 +34,4 @@ const AccountsScreen = () => {
   );
 };
 
-export default AccountsScreen;
+export default ProfileScreen;

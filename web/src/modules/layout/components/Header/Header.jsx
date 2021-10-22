@@ -48,7 +48,7 @@ const Header = ({ user }) => (
     <div>
       {user ? (
         <>
-          <NavItem to={ROUTES.ACCOUNTS.INDEX}>
+          <NavItem to={ROUTES.PROFILE.INDEX}>
             <FontAwesomeIcon icon="user-circle" /> {user.firstName}
           </NavItem>
           <NavItem to={ROUTES.HOME}>
@@ -56,7 +56,7 @@ const Header = ({ user }) => (
           </NavItem>
         </>
       ) : (
-        <NavItem to={ROUTES.AUTH.SIGN_IN}>
+        <NavItem to={ROUTES.AUTH.LOGIN}>
           <FontAwesomeIcon icon="user-circle" /> Sign In
         </NavItem>
       )}

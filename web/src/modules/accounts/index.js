@@ -1,1 +1,1 @@
-export { default as AccountsScreen } from './screens/AccountsScreen';
+export { default as ProfileScreen } from './screens/ProfileScreen';

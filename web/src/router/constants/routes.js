@@ -1,9 +1,9 @@
 export default {
   HOME: '/',
   AUTH: {
-    SIGN_IN: '/sign-in',
+    LOGIN: '/login',
   },
-  ACCOUNTS: {
-    INDEX: '/accounts',
+  PROFILE: {
+    INDEX: '/profile',
   },
 };

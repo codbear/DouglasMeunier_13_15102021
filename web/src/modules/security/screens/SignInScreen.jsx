@@ -31,8 +31,13 @@ const SignInScreen = () => {
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           {() => (
             <Form>
-              <TextField name="username" label="Username" />
-              <TextField name="password" label="Password" type="password" />
+              <TextField name="username" label="Username" inputProps={{ required: true }} />
+              <TextField
+                name="password"
+                label="Password"
+                type="password"
+                inputProps={{ required: true }}
+              />
               <Checkbox label="Remember me" name="rememberMe" />
               <Button type="submit">Sign In</Button>
             </Form>

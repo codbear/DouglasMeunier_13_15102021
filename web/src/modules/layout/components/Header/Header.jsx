@@ -37,7 +37,7 @@ const NavItem = styled(Link)`
   }
 `;
 
-const Header = () => (
+const Header = ({ user }) => (
   <MainNav>
     <NavLogo to={ROUTES.HOME}>
       <img src={argentBankLogo} alt="" />
@@ -46,9 +46,20 @@ const Header = () => (
       </Typography>
     </NavLogo>
     <div>
-      <NavItem to={ROUTES.AUTH.SIGN_IN}>
-        <FontAwesomeIcon icon="user-circle" /> Sign In
-      </NavItem>
+      {user ? (
+        <>
+          <NavItem to={ROUTES.ACCOUNTS.INDEX}>
+            <FontAwesomeIcon icon="user-circle" /> {user.firstName}
+          </NavItem>
+          <NavItem to={ROUTES.HOME}>
+            <FontAwesomeIcon icon="sign-out-alt" /> Sign Out
+          </NavItem>
+        </>
+      ) : (
+        <NavItem to={ROUTES.AUTH.SIGN_IN}>
+          <FontAwesomeIcon icon="user-circle" /> Sign In
+        </NavItem>
+      )}
     </div>
   </MainNav>
 );

@@ -17,9 +17,9 @@ const Main = styled.main`
   background-color: ${({ isDark }) => (isDark ? '#12002b' : 'unset')};
 `;
 
-const Layout = ({ isDark, children }) => (
+const Layout = ({ isDark, children, user }) => (
   <>
-    <Header />
+    <Header user={user} />
     <Main isDark={isDark}>{children}</Main>
     <Footer />
   </>

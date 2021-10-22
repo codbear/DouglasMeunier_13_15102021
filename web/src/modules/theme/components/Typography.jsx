@@ -22,8 +22,8 @@ const variantToComponent = {
   [TYPOGRAPHY.TEXT]: 'p',
 };
 
-const getComponentToRender = (variant, component) => {
-  const componentToRender = component || variantToComponent[variant];
+const getComponentToRender = (variant) => {
+  const componentToRender = variantToComponent[variant];
 
   return styled[componentToRender](({ srOnly }) =>
     srOnly
@@ -63,8 +63,8 @@ const getComponentToRender = (variant, component) => {
   );
 };
 
-const Typography = ({ variant, component, srOnly, children }) => {
-  const ComponentToRender = getComponentToRender(variant, component);
+const Typography = ({ variant, srOnly, children }) => {
+  const ComponentToRender = getComponentToRender(variant);
 
   return <ComponentToRender srOnly={srOnly}>{children}</ComponentToRender>;
 };

@@ -50,7 +50,7 @@ const Features = styled.section`
   }
 `;
 
-const HomeScreen = ({}) => {
+const HomeScreen = () => {
   return (
     <Layout>
       <Hero>

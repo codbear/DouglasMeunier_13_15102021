@@ -1,6 +1,6 @@
-# Project #10 - Argent Bank API
+# Project #13 - Argent Bank
 
-This codebase contains the code needed to run the backend for Argent Bank.
+This codebase contains the code needed to run Argent Bank website.
 
 ## Getting Started
 
@@ -9,9 +9,10 @@ This codebase contains the code needed to run the backend for Argent Bank.
 Argent Bank uses the following tech stack:
 
 - [Node.js v12](https://nodejs.org/en/)
-- [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+- [MongoDB Community Server v5](https://www.mongodb.com/try/download/community)
+- [Yarn v1](https://yarnpkg.com/getting-started/install)
 
-Please make sure you have the right versions and download both packages. You can verify this by using the following commands in your terminal:
+Please make sure you have the right versions and download all packages. You can verify this by using the following commands in your terminal:
 
 ```bash
 # Check Node.js version
@@ -19,27 +20,34 @@ node --version
 
 # Check Mongo version
 mongo --version
+
+# Check Yarn version
+yarn --version
 ```
 
-### Instructions
+### Install
 
-1. Fork this repo
 1. Clone the repo onto your computer
 1. Open a terminal window in the cloned project
 1. Run the following commands:
 
 ```bash
 # Install dependencies
-npm install
+yarn install
 
 # Start local dev server
-npm run dev:server
+yarn dev:server
 
 # Populate database with two users
-npm run populate-db
+yarn populate-db
+
+# Start App
+yarn dev:web
 ```
 
-Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
+The API is served at [http://locahost:3001](http://locahost:3001) and you will now have two users in your MongoDB database!
+
+The App is running at [http://localhost:3000](http://locahost:3000).
 
 ## Populated Database Data
 
@@ -62,11 +70,3 @@ Once you run the `populate-db` script, you should have two users in your databas
 ## API Documentation
 
 To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
-
-## Design Assets
-
-Static HTML and CSS has been created for most of the site and is located in: `/designs`.
-
-For some of the dynamic features, like toggling user editing, there is a mock-up for it in `/designs/wireframes/edit-user-name.png`.
-
-And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.

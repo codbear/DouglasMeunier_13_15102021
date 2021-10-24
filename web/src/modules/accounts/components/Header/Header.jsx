@@ -77,7 +77,7 @@ const Header = ({ firstName, lastName }) => {
               >
                 Save
               </EditFormButton>
-              <EditFormButton variant={BUTTON.CONTAINED} onClick={handleCancel}>
+              <EditFormButton type="button" variant={BUTTON.CONTAINED} onClick={handleCancel}>
                 Cancel
               </EditFormButton>
             </EditForm>

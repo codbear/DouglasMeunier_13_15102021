@@ -8,9 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { TYPOGRAPHY, Typography } from '../../theme';
 import { Button, Checkbox, TextField } from '../../forms';
-import action from '../actions';
+import securityActions from '../actions/securityActions';
 import { ROUTES } from '../../../router';
-import useIsConnected from '../hooks/useIsConnected';
+import useCurrentUser from '../hooks/useCurrentUser';
 
 const SignInCard = styled.section`
   box-sizing: border-box;
@@ -23,7 +23,7 @@ const SignInCard = styled.section`
 const LoginScreen = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const isConnected = useIsConnected();
+  const currentUser = useCurrentUser();
 
   const initialValues = {
     email: '',
@@ -31,13 +31,13 @@ const LoginScreen = () => {
     rememberMe: '',
   };
 
-  const handleSubmit = (values) => dispatch(action.login(values));
+  const handleSubmit = (values) => dispatch(securityActions.login(values));
 
   useEffect(() => {
-    if (isConnected) {
+    if (currentUser?.id) {
       history.push(ROUTES.PROFILE.INDEX);
     }
-  }, [isConnected, history]);
+  }, [currentUser, history]);
 
   return (
     <SignInCard>

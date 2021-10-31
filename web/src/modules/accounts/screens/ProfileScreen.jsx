@@ -1,11 +1,14 @@
 import Header from '../components/Header';
 import { TYPOGRAPHY, Typography } from '../../theme';
 import AccountCard from '../components/AccountCard';
+import { useCurrentUser } from '../../security';
 
 const ProfileScreen = () => {
+  const currentUser = useCurrentUser();
+
   return (
     <>
-      <Header firstName="Tony" lastName="Stark" />
+      <Header firstName={currentUser?.firstName} lastName={currentUser?.lastName} />
       <Typography variant={TYPOGRAPHY.H2} srOnly>
         Accounts
       </Typography>

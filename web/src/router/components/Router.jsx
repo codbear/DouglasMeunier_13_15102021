@@ -2,18 +2,18 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import ROUTES from '../constants/routes';
 import { HomeScreen } from '../../modules/home';
-import { SignInScreen } from '../../modules/security';
-import { AccountsScreen } from '../../modules/accounts';
+import { LoginScreen } from '../../modules/security';
+import { ProfileScreen } from '../../modules/accounts';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={ROUTES.AUTH.SIGN_IN}>
-          <SignInScreen />
+        <Route exact path={ROUTES.AUTH.LOGIN}>
+          <LoginScreen />
         </Route>
-        <Route exact path={ROUTES.ACCOUNTS.INDEX}>
-          <AccountsScreen />
+        <Route exact path={ROUTES.PROFILE.INDEX}>
+          <ProfileScreen />
         </Route>
         <Route path="/">
           <HomeScreen />

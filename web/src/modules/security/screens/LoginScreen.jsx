@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -5,6 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Layout } from '../../layout';
 import { TYPOGRAPHY, Typography } from '../../theme';
 import { Button, Checkbox, TextField } from '../../forms';
+import action from '../actions';
+import { ROUTES } from '../../../router';
+import useIsConnected from '../hooks/useIsConnected';
 
 const SignInCard = styled.section`
   box-sizing: border-box;
@@ -14,14 +20,24 @@ const SignInCard = styled.section`
   padding: 2rem;
 `;
 
-const SignInScreen = () => {
+const LoginScreen = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const isConnected = useIsConnected();
+
   const initialValues = {
-    username: '',
+    email: '',
     password: '',
     rememberMe: '',
   };
 
-  const handleSubmit = (values) => console.log(values);
+  const handleSubmit = (values) => dispatch(action.login(values));
+
+  useEffect(() => {
+    if (isConnected) {
+      history.push(ROUTES.PROFILE.INDEX);
+    }
+  }, [isConnected, history]);
 
   return (
     <Layout isDark>
@@ -31,7 +47,7 @@ const SignInScreen = () => {
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           {() => (
             <Form>
-              <TextField name="username" label="Username" inputProps={{ required: true }} />
+              <TextField name="email" label="Username" inputProps={{ required: true }} />
               <TextField
                 name="password"
                 label="Password"
@@ -48,4 +64,4 @@ const SignInScreen = () => {
   );
 };
 
-export default SignInScreen;
+export default LoginScreen;

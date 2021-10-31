@@ -28,20 +28,19 @@ export default class ClientApi {
 
   /**
    * @public
-   * @desc Throw an error if JWT is missing or expired.
+   * @desc Check if JWT is not missing nor expired.
+   * @return {boolean}
    * @example try { client.checkLoginStatus() } catch (e) { console.log(e) }
    */
   checkLoginStatus() {
     if (!this.bearerToken) {
-      throw new Error('JWT is missing.');
+      return false;
     }
 
     const { exp: expiration } = jwtDecode(this.bearerToken);
     const isJWTExpired = Date.now() > expiration * 1000;
 
-    if (isJWTExpired) {
-      throw new Error('JWT is expired.');
-    }
+    return !isJWTExpired && this.bearerToken;
   }
 
   /**

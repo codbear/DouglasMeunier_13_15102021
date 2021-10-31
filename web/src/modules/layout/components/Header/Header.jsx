@@ -1,4 +1,4 @@
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -40,7 +40,6 @@ const NavItem = styled(Link)`
 `;
 
 const Header = ({ user }) => {
-  const history = useHistory();
   const dispatch = useDispatch();
 
   return (

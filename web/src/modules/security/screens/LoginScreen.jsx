@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 import { Formik, Form } from 'formik';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Layout } from '../../layout';
 import { TYPOGRAPHY, Typography } from '../../theme';
 import { Button, Checkbox, TextField } from '../../forms';
 import action from '../actions';
@@ -40,27 +40,25 @@ const LoginScreen = () => {
   }, [isConnected, history]);
 
   return (
-    <Layout isDark>
-      <SignInCard>
-        <FontAwesomeIcon icon="user-circle" />
-        <Typography variant={TYPOGRAPHY.H1}>Sign In</Typography>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-          {() => (
-            <Form>
-              <TextField name="email" label="Username" inputProps={{ required: true }} />
-              <TextField
-                name="password"
-                label="Password"
-                type="password"
-                inputProps={{ required: true }}
-              />
-              <Checkbox label="Remember me" name="rememberMe" />
-              <Button type="submit">Sign In</Button>
-            </Form>
-          )}
-        </Formik>
-      </SignInCard>
-    </Layout>
+    <SignInCard>
+      <FontAwesomeIcon icon="user-circle" />
+      <Typography variant={TYPOGRAPHY.H1}>Sign In</Typography>
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        {() => (
+          <Form>
+            <TextField name="email" label="Username" inputProps={{ required: true }} />
+            <TextField
+              name="password"
+              label="Password"
+              type="password"
+              inputProps={{ required: true }}
+            />
+            <Checkbox label="Remember me" name="rememberMe" />
+            <Button type="submit">Sign In</Button>
+          </Form>
+        )}
+      </Formik>
+    </SignInCard>
   );
 };
 

@@ -2,7 +2,7 @@ import Helper from '../models/Helper';
 
 export default class MeHelper extends Helper {
   constructor() {
-    super('/profile');
+    super('/user/profile');
   }
 
   /**
@@ -10,7 +10,7 @@ export default class MeHelper extends Helper {
    * @returns {Promise}
    */
   me() {
-    const request = this.api.createGetRequest(this.endpoint);
+    const request = this.api.createPostRequest(this.endpoint);
 
     return request.execute();
   }

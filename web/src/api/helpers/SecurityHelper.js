@@ -14,6 +14,6 @@ export default class SecurityHelper extends Helper {
       .execute();
     const { token } = response.data.body;
 
-    this.setStorageItem(STORAGE_KEYS.BEARER_TOKEN, token);
+    this.api.setStorageItem(STORAGE_KEYS.BEARER_TOKEN, token);
   }
 }

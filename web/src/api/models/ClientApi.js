@@ -2,8 +2,7 @@ import storage from 'local-storage-fallback';
 import jwtDecode from 'jwt-decode';
 
 import Request from './Request';
-
-const BEARER_TOKEN_KEY = 'bearerToken';
+import STORAGE_KEYS from '../constants/storageKeys';
 
 export default class ClientApi {
   /**
@@ -11,27 +10,20 @@ export default class ClientApi {
    * @param {string} version - API version to use.
    */
   constructor(baseUrl = process.env.REACT_APP_API_ROOT_URL, version = 'v1') {
+    /**
+     * @type {string}
+     */
     this.baseUrl = `${baseUrl}/${version}`;
+
+    /**
+     * @type {string}
+     */
     this.version = version;
-    this.bearerToken = this.getStorageItem(BEARER_TOKEN_KEY) || null;
-  }
 
-  /**
-   * @public
-   * @desc Execute a POST to API's login route and store returned JWT.
-   * @param {Object.<string>} userCredentials - User's credentials.
-   * @returns {Promise<void>}
-   */
-  async login(userCredentials) {
-    try {
-      const request = new Request(this.baseUrl, 'POST', '/user/login');
-      const response = await request.setBodyParams(userCredentials).execute();
-      const { token } = response.data.body;
-
-      this.setStorageItem(BEARER_TOKEN_KEY, token);
-    } catch (e) {
-      this.removeStorageItem(BEARER_TOKEN_KEY);
-    }
+    /**
+     * @type {String|null}
+     */
+    this.bearerToken = this.getStorageItem(STORAGE_KEYS.BEARER_TOKEN) || null;
   }
 
   /**

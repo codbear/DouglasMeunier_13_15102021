@@ -65,6 +65,24 @@ export default class Request {
 
   /**
    * @public
+   * @desc Define a specific header value.
+   * @param {String} headerName - Header to set.
+   * @param {String} headerValue - Value to set.
+   * @return {Request} - This request.
+   * @example request.setHeader('Content-Type', 'text/html');
+   */
+  setHeader(headerName, headerValue) {
+    if (headerValue === undefined) {
+      delete this.headers[headerName];
+    } else {
+      this.headers[headerName] = headerValue;
+    }
+
+    return this;
+  }
+
+  /**
+   * @public
    * @desc Define body params.
    * @param {Object.<string>} body - An object containing multiple values.
    * @return {Request} - This request.

@@ -104,9 +104,38 @@ export default class ClientApi {
   createRequest(method, endpoint) {
     const request = new Request(this.baseUrl, method, endpoint);
 
-    request.setHeaders({ Authorization: `Bearer${this.bearerToken}` });
+    request.setHeader('Authorization', `Bearer${this.bearerToken}`);
 
     return request;
+  }
+
+  /**
+   * @public
+   * @desc Get an item from local storage by its key.
+   * @param {String} storageKey Key to get. It'll be prepend by client version of this instance.
+   * @return {String|Number} The local storage item.
+   */
+  getStorageItem(storageKey) {
+    return storage.getItem(this.prependStringWithClientVersion(storageKey));
+  }
+
+  /**
+   * @public
+   * @desc Set a local storage item.
+   * @param {String} storageKey Key to set. It'll be prepend by client version of this instance.
+   * @param {String|Number} itemValue The value to store.
+   */
+  setStorageItem(storageKey, itemValue) {
+    storage.setItem(this.prependStringWithClientVersion(storageKey), itemValue);
+  }
+
+  /**
+   * @public
+   * @desc Remove an item from local storage by its key.
+   * @param {String} storageKey Key to remove. It'll be prepend by client version of this instance.
+   */
+  removeStorageItem(storageKey) {
+    storage.removeItem(this.prependStringWithClientVersion(storageKey));
   }
 
   /**
@@ -117,34 +146,5 @@ export default class ClientApi {
    */
   prependStringWithClientVersion(string) {
     return `clientAPI${this.version}__${string}`;
-  }
-
-  /**
-   * @private
-   * @desc Get an item from local storage by its key.
-   * @param {String} storageKey Key to get. It'll be prepend by client version of this instance.
-   * @return {String|Number} The local storage item.
-   */
-  getStorageItem(storageKey) {
-    return storage.getItem(this.prependStringWithClientVersion(storageKey));
-  }
-
-  /**
-   * @private
-   * @desc Set a local storage item.
-   * @param {String} storageKey Key to set. It'll be prepend by client version of this instance.
-   * @param {String|Number} itemValue The value to store.
-   */
-  setStorageItem(storageKey, itemValue) {
-    storage.setItem(this.prependStringWithClientVersion(storageKey), itemValue);
-  }
-
-  /**
-   * @private
-   * @desc Remove an item from local storage by its key.
-   * @param {String} storageKey Key to remove. It'll be prepend by client version of this instance.
-   */
-  removeStorageItem(storageKey) {
-    storage.removeItem(this.prependStringWithClientVersion(storageKey));
   }
 }

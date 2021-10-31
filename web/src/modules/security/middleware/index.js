@@ -15,6 +15,10 @@ const securityMiddleware = (store) => (next) => async (action) => {
         return store.dispatch(actions.loginFailure());
       }
 
+    case ACTION_TYPES.LOGOUT:
+      api.security().logout();
+      break;
+
     default:
       break;
   }

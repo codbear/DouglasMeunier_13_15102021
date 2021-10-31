@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import { Layout } from '../../layout';
 import { TYPOGRAPHY, Typography } from '../../theme';
 import FeatureItem from '../components/FeatureItem';
 
@@ -52,7 +51,7 @@ const Features = styled.section`
 
 const HomeScreen = () => {
   return (
-    <Layout>
+    <>
       <Hero>
         <section className="hero-content">
           <Typography variant={TYPOGRAPHY.H2} srOnly>
@@ -85,7 +84,7 @@ const HomeScreen = () => {
           icon={securityIcon}
         />
       </Features>
-    </Layout>
+    </>
   );
 };
 

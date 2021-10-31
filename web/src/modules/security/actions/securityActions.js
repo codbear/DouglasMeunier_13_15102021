@@ -7,6 +7,7 @@ const securityActions = {
   }),
   loginSuccess: () => ({ type: ACTION_TYPES.LOGIN_SUCCESS }),
   loginFailure: () => ({ type: ACTION_TYPES.LOGIN_FAILURE }),
+  logout: () => ({ type: ACTION_TYPES.LOGOUT }),
 };
 
 export default securityActions;

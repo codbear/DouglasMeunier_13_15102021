@@ -1,16 +1,13 @@
-import { Layout } from '../../layout';
 import Header from '../components/Header';
 import { TYPOGRAPHY, Typography } from '../../theme';
 import AccountCard from '../components/AccountCard';
+import { useCurrentUser } from '../../security';
 
 const ProfileScreen = () => {
-  const currentUser = {
-    firstName: 'Tony',
-    lastName: 'Stark',
-  };
+  const currentUser = useCurrentUser();
 
   return (
-    <Layout isDark user={currentUser}>
+    <>
       <Header firstName={currentUser?.firstName} lastName={currentUser?.lastName} />
       <Typography variant={TYPOGRAPHY.H2} srOnly>
         Accounts
@@ -30,7 +27,7 @@ const ProfileScreen = () => {
         amount="$184.30"
         description="Current Balance"
       />
-    </Layout>
+    </>
   );
 };
 

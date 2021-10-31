@@ -1,10 +1,12 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { ROUTES } from '../../../../router';
 import { TYPOGRAPHY, Typography } from '../../../theme';
 import argentBankLogo from '../../images/argentBankLogo.png';
+import { securityActions } from '../../../security';
 
 const MainNav = styled.nav`
   display: flex;
@@ -37,31 +39,35 @@ const NavItem = styled(Link)`
   }
 `;
 
-const Header = ({ user }) => (
-  <MainNav>
-    <NavLogo to={ROUTES.HOME}>
-      <img src={argentBankLogo} alt="" />
-      <Typography variant={TYPOGRAPHY.H1} srOnly>
-        Argent Bank
-      </Typography>
-    </NavLogo>
-    <div>
-      {user ? (
-        <>
-          <NavItem to={ROUTES.PROFILE.INDEX}>
-            <FontAwesomeIcon icon="user-circle" /> {user.firstName}
+const Header = ({ user }) => {
+  const dispatch = useDispatch();
+
+  return (
+    <MainNav>
+      <NavLogo to={ROUTES.HOME}>
+        <img src={argentBankLogo} alt="" />
+        <Typography variant={TYPOGRAPHY.H1} srOnly>
+          Argent Bank
+        </Typography>
+      </NavLogo>
+      <div>
+        {user ? (
+          <>
+            <NavItem to={ROUTES.PROFILE.INDEX}>
+              <FontAwesomeIcon icon="user-circle" /> {user.firstName}
+            </NavItem>
+            <NavItem to={ROUTES.HOME} onClick={() => dispatch(securityActions.logout())}>
+              <FontAwesomeIcon icon="sign-out-alt" /> Sign Out
+            </NavItem>
+          </>
+        ) : (
+          <NavItem to={ROUTES.AUTH.LOGIN}>
+            <FontAwesomeIcon icon="user-circle" /> Sign In
           </NavItem>
-          <NavItem to={ROUTES.HOME}>
-            <FontAwesomeIcon icon="sign-out-alt" /> Sign Out
-          </NavItem>
-        </>
-      ) : (
-        <NavItem to={ROUTES.AUTH.LOGIN}>
-          <FontAwesomeIcon icon="user-circle" /> Sign In
-        </NavItem>
-      )}
-    </div>
-  </MainNav>
-);
+        )}
+      </div>
+    </MainNav>
+  );
+};
 
 export default Header;

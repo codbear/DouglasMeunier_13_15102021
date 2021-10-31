@@ -1,8 +1,5 @@
 import { useSelector } from 'react-redux';
-import { getIsConnected } from '../selectors';
 
-const useIsConnected = () => {
-  return useSelector(getIsConnected);
-};
+const useIsConnected = () => useSelector((state) => state.security.isConnected);
 
 export default useIsConnected;

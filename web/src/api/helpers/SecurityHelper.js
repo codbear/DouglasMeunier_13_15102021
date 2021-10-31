@@ -15,4 +15,8 @@ export default class SecurityHelper extends Helper {
 
     this.api.setStorageItem(STORAGE_KEYS.BEARER_TOKEN, token);
   }
+
+  logout() {
+    this.api.removeStorageItem(STORAGE_KEYS.BEARER_TOKEN);
+  }
 }

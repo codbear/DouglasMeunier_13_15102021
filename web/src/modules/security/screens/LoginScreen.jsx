@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 import { Formik, Form } from 'formik';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Layout } from '../../layout';
 import { TYPOGRAPHY, Typography } from '../../theme';
 import { Button, Checkbox, TextField } from '../../forms';
-import action from '../actions';
+import securityActions from '../actions/securityActions';
 import { ROUTES } from '../../../router';
-import useIsConnected from '../hooks/useIsConnected';
+import useCurrentUser from '../hooks/useCurrentUser';
 
 const SignInCard = styled.section`
   box-sizing: border-box;
@@ -23,7 +23,7 @@ const SignInCard = styled.section`
 const LoginScreen = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const isConnected = useIsConnected();
+  const currentUser = useCurrentUser();
 
   const initialValues = {
     email: '',
@@ -31,36 +31,34 @@ const LoginScreen = () => {
     rememberMe: '',
   };
 
-  const handleSubmit = (values) => dispatch(action.login(values));
+  const handleSubmit = (values) => dispatch(securityActions.login(values));
 
   useEffect(() => {
-    if (isConnected) {
+    if (currentUser?.id) {
       history.push(ROUTES.PROFILE.INDEX);
     }
-  }, [isConnected, history]);
+  }, [currentUser, history]);
 
   return (
-    <Layout isDark>
-      <SignInCard>
-        <FontAwesomeIcon icon="user-circle" />
-        <Typography variant={TYPOGRAPHY.H1}>Sign In</Typography>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-          {() => (
-            <Form>
-              <TextField name="email" label="Username" inputProps={{ required: true }} />
-              <TextField
-                name="password"
-                label="Password"
-                type="password"
-                inputProps={{ required: true }}
-              />
-              <Checkbox label="Remember me" name="rememberMe" />
-              <Button type="submit">Sign In</Button>
-            </Form>
-          )}
-        </Formik>
-      </SignInCard>
-    </Layout>
+    <SignInCard>
+      <FontAwesomeIcon icon="user-circle" />
+      <Typography variant={TYPOGRAPHY.H1}>Sign In</Typography>
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        {() => (
+          <Form>
+            <TextField name="email" label="Username" inputProps={{ required: true }} />
+            <TextField
+              name="password"
+              label="Password"
+              type="password"
+              inputProps={{ required: true }}
+            />
+            <Checkbox label="Remember me" name="rememberMe" />
+            <Button type="submit">Sign In</Button>
+          </Form>
+        )}
+      </Formik>
+    </SignInCard>
   );
 };
 

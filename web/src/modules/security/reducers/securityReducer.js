@@ -9,13 +9,6 @@ const initialState = {
 
 export default function securityReducer(state = initialState, action) {
   switch (action.type) {
-    case ACTION_TYPES.LOGIN_REQUEST: {
-      return {
-        ...state,
-        isConnected: false,
-      };
-    }
-
     case ACTION_TYPES.LOGIN_SUCCESS: {
       return {
         ...state,
@@ -23,7 +16,9 @@ export default function securityReducer(state = initialState, action) {
       };
     }
 
-    case ACTION_TYPES.LOGIN_FAILURE: {
+    case ACTION_TYPES.LOGIN_REQUEST:
+    case ACTION_TYPES.LOGIN_FAILURE:
+    case ACTION_TYPES.LOGOUT: {
       return {
         ...state,
         isConnected: false,

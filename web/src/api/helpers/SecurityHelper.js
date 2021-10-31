@@ -1,5 +1,4 @@
 import Helper from '../models/Helper';
-import Request from '../models/Request';
 import STORAGE_KEYS from '../constants/storageKeys';
 
 export default class SecurityHelper extends Helper {

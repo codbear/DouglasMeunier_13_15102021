@@ -1,0 +1,212 @@
+swagger: '2.0'
+info:
+  title: Bank Argent Accounts API documentation
+  description: Contains all available API endpoints for accounts
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /accounts:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Accounts
+      summary: Find user accounts
+      description: Returns all accounts of a user
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User accounts retrieved successfully
+          schema:
+            $ref: '#/definitions/AccountsResponse'
+        '401':
+          description: Invalid token
+        '500':
+          description: Internal Server Error
+  /accounts/{accountId}/transactions:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Accounts
+      summary: Find transactions of a user account
+      description: Returns all transactions of an account
+      parameters:
+        - in: path
+          name: accountId
+          description: ID of account to retrieve transactions from
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Account transactions retrieved successfully
+          schema:
+            $ref: '#/definitions/TransactionsResponse'
+        '401':
+          description: Invalid token
+        '500':
+          description: Internal Server Error
+  /accounts/{accountId}/transactions/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Accounts
+      summary: Find transaction by ID
+      description: Returns a single transaction
+      parameters:
+        - in: path
+          name: accountId
+          description: ID of account
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: ID of transaction to retrieve
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction retrieved successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '401':
+          description: Invalid token
+        '500':
+          description: Internal Server Error
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - Accounts
+      summary: Update an existing transaction
+      description: Update transaction's type or notes and return updated transaction
+      parameters:
+        - in: path
+          name: accountId
+          description: ID of account
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: ID of transaction to update
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT
+          type: string
+          required: true
+        - in: body
+          name: body
+          description: Transaction object that needs to be updated
+          required: true
+          schema:
+            $ref: "#/definitions/PartialTransaction"
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction updated successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '401':
+          description: Invalid token
+        '500':
+          description: Internal Server Error
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  AccountsResponse:
+    type: array
+    items:
+      $ref: "#/definitions/Account"
+  Account:
+    type: object
+    properties:
+      id:
+        type: string
+        example: x8349
+      name:
+        type: string
+        example: Argent Bank Checking
+      balance:
+        type: number
+        format: float
+        example: 2082.79
+      currency:
+        type: string
+        example: dollar
+  TransactionsResponse:
+    type: object
+    properties:
+      account:
+        $ref: "#/definitions/Account"
+      transactions:
+        type: array
+        items: 
+          $ref: "#/definitions/Transaction"
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+        example: x8349tr467854
+      description:
+        type: string
+        example: Golden Sun bakery
+      amount: 
+        type: number
+        format: float
+        example: 3
+      type:
+        type: string
+        example: credit card
+      category:
+        type: string
+        example: Food
+      notes:
+        type: string
+      created_at:
+        type: string
+        example: "2021-10-17 12:34:55"
+      account:
+        $ref: "#/definitions/Account"
+  PartialTransaction:
+    type: object
+    properties:
+      category:
+        type: string
+        example: Food
+      notes:
+        type: string
+      
+  

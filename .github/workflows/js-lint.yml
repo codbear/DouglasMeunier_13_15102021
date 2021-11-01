@@ -8,7 +8,7 @@ name: JS Lint
 
 jobs:
   lint:
-    name: Lint web
+    name: Lint client
     runs-on: ubuntu-latest
 
     steps:
@@ -24,4 +24,4 @@ jobs:
         run: yarn install
 
       - name: Run Prettier
-        run: yarn workspace web prettier:check
+        run: yarn workspace client prettier:check

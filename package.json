@@ -19,7 +19,7 @@
     "yamljs": "^0.3.0"
   },
   "scripts": {
-    "dev:web": "yarn workspace web start",
+    "dev:client": "yarn workspace client start",
     "dev:server": "nodemon ./server/server.js",
     "populate-db": "node ./server/scripts/populateDatabase.js",
     "server": "node ./server/server.js"
@@ -28,6 +28,6 @@
     "nodemon": "^2.0.4"
   },
   "workspaces": [
-    "web"
+    "client"
   ]
 }

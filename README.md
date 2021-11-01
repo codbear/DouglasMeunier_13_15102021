@@ -42,7 +42,7 @@ yarn dev:server
 yarn populate-db
 
 # Start App
-yarn dev:web
+yarn dev:client
 ```
 
 The API is served at [http://locahost:3001](http://locahost:3001) and you will now have two users in your MongoDB database!

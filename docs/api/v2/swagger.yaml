@@ -1,0 +1,374 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
+  version: '2.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v2
+schemes:
+  - http
+paths:
+  /login:
+    post:
+      tags:
+        - Auth
+      summary: Request a JWT for authenticating user
+      description: Return a JWT
+      parameters:
+        - in: body
+          name: body
+          description: User credentials
+          required: true
+          schema:
+            $ref: '#/definitions/LoginPayload'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Authenticated successfully
+          schema:
+            $ref: '#/definitions/AuthenticationResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /register:
+    post:
+      tags:
+        - Auth
+      summary: Register a new user
+      description: Return a JWT
+      parameters:
+        - in: body
+          name: body
+          description: User credentials
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterPayload'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Registered Successfully
+          schema:
+            $ref: '#/definitions/AuthenticationResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /me:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - User
+      summary: Get user profile
+      description: Return user profile
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User profile retrieved successully
+          schema:
+            $ref: '#/definitions/UserProfile'
+        '401':
+          description: Invalid token
+        '500':
+          description: Internal Server Error
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - User
+      summary: Update user profile
+      description: Return user updated profile
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          type: string
+          required: true
+        - in: body
+          name: body
+          description: Update user profile attributes
+          required: true
+          schema:
+            $ref: '#/definitions/PartialUserProfile'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User profile updated successfully
+          schema:
+            $ref: '#/definitions/UserProfile'
+        '400':
+          description: Invalid Fields
+        '401':
+          description: Invalid token
+        '500':
+          description: Internal Server Error
+  /accounts:
+    get:
+      security:
+        - Bearer: [ ]
+      tags:
+        - Accounts
+      summary: Find user accounts
+      description: Returns all accounts of a user
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User accounts retrieved successfully
+          schema:
+            $ref: '#/definitions/AccountsResponse'
+        '401':
+          description: Invalid token
+        '500':
+          description: Internal Server Error
+  /accounts/{accountId}/transactions:
+    get:
+      security:
+        - Bearer: [ ]
+      tags:
+        - Accounts
+      summary: Find transactions of a user account
+      description: Returns all transactions of an account
+      parameters:
+        - in: path
+          name: accountId
+          description: ID of account to retrieve transactions from
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Account transactions retrieved successfully
+          schema:
+            $ref: '#/definitions/TransactionsResponse'
+        '401':
+          description: Invalid token
+        '500':
+          description: Internal Server Error
+  /accounts/{accountId}/transactions/{transactionId}:
+    get:
+      security:
+        - Bearer: [ ]
+      tags:
+        - Accounts
+      summary: Find transaction by ID
+      description: Returns a single transaction
+      parameters:
+        - in: path
+          name: accountId
+          description: ID of account
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: ID of transaction to retrieve
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction retrieved successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '401':
+          description: Invalid token
+        '500':
+          description: Internal Server Error
+    patch:
+      security:
+        - Bearer: [ ]
+      tags:
+        - Accounts
+      summary: Update an existing transaction
+      description: Update transaction's type or notes and return updated transaction
+      parameters:
+        - in: path
+          name: accountId
+          description: ID of account
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: ID of transaction to update
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT
+          type: string
+          required: true
+        - in: body
+          name: body
+          description: Transaction object that needs to be updated
+          required: true
+          schema:
+            $ref: "#/definitions/PartialTransaction"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction updated successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid Fields
+        '401':
+          description: Invalid token
+        '500':
+          description: Internal Server Error
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  RegisterPayload:
+    properties:
+      email:
+        type: string
+        description: user email
+      password:
+        type: string
+        description: user password
+      firstName:
+        type: string
+        description: user first name
+      lastName:
+        type: string
+        description: user last name
+  LoginPayload:
+    properties:
+      email:
+        type: string
+        description: user email
+      password:
+        type: string
+        description: user password
+  AuthenticationResponse:
+    type: object
+    properties:
+      token:
+        type: string
+  UserProfile:
+    type: object
+    properties:
+      id:
+        type: string
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      createdAt:
+        type: string
+      updatedAt:
+        type: string
+  PartialUserProfile:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+  AccountsResponse:
+    type: array
+    items:
+      $ref: "#/definitions/Account"
+  Account:
+    type: object
+    properties:
+      id:
+        type: string
+        example: x8349
+      name:
+        type: string
+        example: Argent Bank Checking
+      balance:
+        type: number
+        format: float
+        example: 2082.79
+      currency:
+        type: string
+        example: dollar
+  TransactionsResponse:
+    type: object
+    properties:
+      account:
+        $ref: "#/definitions/Account"
+      transactions:
+        type: array
+        items:
+          $ref: "#/definitions/Transaction"
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+        example: x8349tr467854
+      description:
+        type: string
+        example: Golden Sun bakery
+      amount:
+        type: number
+        format: float
+        example: 3
+      type:
+        type: string
+        example: credit card
+      category:
+        type: string
+        example: Food
+      notes:
+        type: string
+      created_at:
+        type: string
+        example: "2021-10-17 12:34:55"
+      account:
+        $ref: "#/definitions/Account"
+  PartialTransaction:
+    type: object
+    properties:
+      category:
+        type: string
+        example: Food
+      notes:
+        type: string

@@ -54,7 +54,7 @@ const HomeScreen = () => {
     <>
       <Hero>
         <section className="hero-content">
-          <Typography variant={TYPOGRAPHY.H2} srOnly>
+          <Typography component="h2" srOnly>
             Promoted Content
           </Typography>
           <Typography variant={TYPOGRAPHY.SUBTITLE}>No fees.</Typography>

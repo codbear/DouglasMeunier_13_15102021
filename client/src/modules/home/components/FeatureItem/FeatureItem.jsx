@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { Typography } from '../../../theme';
+
 const propTypes = {
   title: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
@@ -33,7 +35,7 @@ const FeatureItem = ({ title, content, icon }) => {
     <FeatureItemRoot>
       <FeatureIcon src={icon} alt="" />
       <FeatureItemTitle>{title}</FeatureItemTitle>
-      <p>{content}</p>
+      <Typography>{content}</Typography>
     </FeatureItemRoot>
   );
 };

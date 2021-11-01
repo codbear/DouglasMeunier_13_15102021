@@ -46,7 +46,7 @@ const Header = ({ user }) => {
     <MainNav>
       <NavLogo to={ROUTES.HOME}>
         <img src={argentBankLogo} alt="" />
-        <Typography variant={TYPOGRAPHY.H1} srOnly>
+        <Typography component="h1" srOnly>
           Argent Bank
         </Typography>
       </NavLogo>

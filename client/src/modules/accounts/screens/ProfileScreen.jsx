@@ -16,7 +16,7 @@ const ProfileScreen = () => {
   return (
     <>
       <Header firstName={currentUser?.firstName} lastName={currentUser?.lastName} />
-      <Typography variant={TYPOGRAPHY.H2} srOnly>
+      <Typography component="h2" srOnly>
         Accounts
       </Typography>
       <AccountCard

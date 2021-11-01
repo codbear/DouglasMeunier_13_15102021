@@ -53,7 +53,7 @@ const Header = ({ firstName, lastName }) => {
 
   return (
     <HeaderRoot>
-      <Typography variant={TYPOGRAPHY.H1}>
+      <Typography component="h1">
         Welcome back
         {!isEditMode && (
           <>

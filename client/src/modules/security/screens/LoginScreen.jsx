@@ -42,7 +42,7 @@ const LoginScreen = () => {
   return (
     <SignInCard>
       <FontAwesomeIcon icon="user-circle" />
-      <Typography variant={TYPOGRAPHY.H1}>Sign In</Typography>
+      <Typography component="h1">Sign In</Typography>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {() => (
           <Form>

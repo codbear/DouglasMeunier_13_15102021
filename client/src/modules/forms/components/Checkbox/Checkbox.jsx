@@ -14,17 +14,17 @@ const defaultProps = {
 
 const FormControl = styled.div`
   display: flex;
+`;
 
-  label {
-    margin-left: 0.25rem;
-  }
+const Label = styled.span`
+  margin-left: 0.25rem;
 `;
 
 const Checkbox = ({ name, label, labelProps, otherProps }) => (
   <FormControl>
     <label {...labelProps}>
       <Field type="checkbox" name={name} {...otherProps} />
-      {label}
+      <Label>{label}</Label>
     </label>
   </FormControl>
 );

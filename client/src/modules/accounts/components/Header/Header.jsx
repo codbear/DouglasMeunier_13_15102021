@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
-import { TYPOGRAPHY, Typography } from '../../../theme';
+import { Typography } from '../../../theme';
 import { BUTTON, Button, TextField } from '../../../forms';
 import { userActions } from '../../../security';
 
@@ -14,7 +14,7 @@ const propTypes = {
 };
 
 const HeaderRoot = styled.div`
-  color: #fff;
+  color: ${({ theme }) => theme.palette.text.contrasted};
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
@@ -53,7 +53,7 @@ const Header = ({ firstName, lastName }) => {
 
   return (
     <HeaderRoot>
-      <Typography variant={TYPOGRAPHY.H1}>
+      <Typography component="h1">
         Welcome back
         {!isEditMode && (
           <>

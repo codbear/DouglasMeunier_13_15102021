@@ -1,7 +1,7 @@
 import { Redirect } from 'react-router-dom';
 
 import Header from '../components/Header';
-import { TYPOGRAPHY, Typography } from '../../theme';
+import { Typography } from '../../theme';
 import AccountCard from '../components/AccountCard';
 import { useCurrentUser } from '../../security';
 import { ROUTES } from '../../../router';
@@ -16,7 +16,7 @@ const ProfileScreen = () => {
   return (
     <>
       <Header firstName={currentUser?.firstName} lastName={currentUser?.lastName} />
-      <Typography variant={TYPOGRAPHY.H2} srOnly>
+      <Typography component="h2" srOnly>
         Accounts
       </Typography>
       <AccountCard

@@ -6,7 +6,7 @@ import { Formik, Form } from 'formik';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { TYPOGRAPHY, Typography } from '../../theme';
+import { Typography } from '../../theme';
 import { Button, Checkbox, TextField } from '../../forms';
 import securityActions from '../actions/securityActions';
 import { ROUTES } from '../../../router';
@@ -14,7 +14,7 @@ import useCurrentUser from '../hooks/useCurrentUser';
 
 const SignInCard = styled.section`
   box-sizing: border-box;
-  background-color: white;
+  background-color: ${({ theme }) => theme.palette.background.default};
   width: 300px;
   margin: 3rem auto 0 auto;
   padding: 2rem;
@@ -42,7 +42,7 @@ const LoginScreen = () => {
   return (
     <SignInCard>
       <FontAwesomeIcon icon="user-circle" />
-      <Typography variant={TYPOGRAPHY.H1}>Sign In</Typography>
+      <Typography component="h1">Sign In</Typography>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {() => (
           <Form>

@@ -1,35 +1,47 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import BUTTON from '../../constants/button';
+import BUTTON from '../../constants/buttonVariants';
 
 const propTypes = {
-  variant: PropTypes.string,
+  variant: PropTypes.oneOf(Object.values(BUTTON)),
+  children: PropTypes.node,
 };
 
 const defaultProps = {
-  variant: BUTTON.DEFAULT,
+  variant: BUTTON.WIDE,
+  children: null,
 };
 
-const StyledButton = styled.button`
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
+const BaseButton = styled.button`
+  border-color: ${({ theme }) => theme.palette.border.primary};
+  background-color: ${({ theme }) => theme.palette.background.primary};
+  color: ${({ theme }) => theme.palette.text.contrasted};
   font-weight: bold;
   cursor: pointer;
-  padding: ${({ variant }) => (variant === BUTTON.CONTAINED ? '10px' : '8px')};
-  ${({ variant }) => (variant === BUTTON.CONTAINED ? '' : 'width: 100%')};
-  ${({ variant }) => (variant === BUTTON.CONTAINED ? '' : 'display: block')};
-  ${({ variant }) => (variant === BUTTON.CONTAINED ? '' : 'font-size: 1.1rem')};
-  ${({ variant }) => (variant === BUTTON.CONTAINED ? '' : 'margin-top: 1rem')};
 `;
 
+const WideButton = styled(BaseButton)`
+  padding: 8px;
+  width: 100%;
+  display: block;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+`;
+
+const ContainedButton = styled(BaseButton)`
+  padding: 10px;
+`;
+
+const variantToComponent = {
+  [BUTTON.WIDE]: WideButton,
+  [BUTTON.CONTAINED]: ContainedButton,
+};
+
 const Button = ({ variant, children, ...otherProps }) => {
-  return (
-    <StyledButton variant={variant} {...otherProps}>
-      {children}
-    </StyledButton>
-  );
+  const ComponentToRender = variantToComponent[variant];
+
+  return <ComponentToRender {...otherProps}>{children}</ComponentToRender>;
 };
 
 Button.propTypes = propTypes;

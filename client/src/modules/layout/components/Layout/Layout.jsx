@@ -14,7 +14,8 @@ const defaultProps = {
 
 const Main = styled.main`
   flex: 1;
-  background-color: ${({ isDark }) => (isDark ? '#12002b' : 'unset')};
+  background-color: ${({ isDark, theme }) =>
+    isDark ? theme.palette.background.alternative : theme.palette.background.default};
 `;
 
 const Layout = ({ isDark, children, user }) => (

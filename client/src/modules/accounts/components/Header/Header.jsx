@@ -14,7 +14,7 @@ const propTypes = {
 };
 
 const HeaderRoot = styled.div`
-  color: #fff;
+  color: ${({ theme }) => theme.palette.text.contrasted};
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;

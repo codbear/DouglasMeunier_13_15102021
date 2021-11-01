@@ -14,7 +14,7 @@ import useCurrentUser from '../hooks/useCurrentUser';
 
 const SignInCard = styled.section`
   box-sizing: border-box;
-  background-color: white;
+  background-color: ${({ theme }) => theme.palette.background.default};
   width: 300px;
   margin: 3rem auto 0 auto;
   padding: 2rem;

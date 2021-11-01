@@ -14,9 +14,9 @@ const defaultProps = {
 };
 
 const BaseButton = styled.button`
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
+  border-color: ${({ theme }) => theme.palette.border.primary};
+  background-color: ${({ theme }) => theme.palette.background.primary};
+  color: ${({ theme }) => theme.palette.text.contrasted};
   font-weight: bold;
   cursor: pointer;
 `;

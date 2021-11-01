@@ -16,7 +16,7 @@ const MainNav = styled.nav`
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: ${({ theme }) => theme.palette.text.default};
   }
 `;
 

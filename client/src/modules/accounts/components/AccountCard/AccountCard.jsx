@@ -13,8 +13,8 @@ const AccountCardRoot = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
-  background-color: #fff;
+  border: 1px solid ${({ theme }) => theme.palette.border.default};
+  background-color: ${({ theme }) => theme.palette.background.default};
   width: 80%;
   margin: 0 auto 2rem auto;
   flex-direction: column;

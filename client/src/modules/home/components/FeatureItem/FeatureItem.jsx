@@ -16,13 +16,13 @@ const FeatureItemRoot = styled.div`
 
 const FeatureItemIcon = styled.img`
   width: 100px;
-  border: 10px solid #00bc77;
+  border: 10px solid ${({ theme }) => theme.palette.border.primary};
   border-radius: 50%;
   padding: 1rem;
 `;
 
 const FeatureItemTitle = styled.h3`
-  color: #222;
+  color: ${({ theme }) => theme.palette.text.alternative};
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 0.5rem;

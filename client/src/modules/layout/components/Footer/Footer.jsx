@@ -4,7 +4,7 @@ import { Typography } from '../../../theme';
 const FooterRoot = styled.footer`
   display: flex;
   justify-content: center;
-  border-top: 2px solid #ccc;
+  border-top: 2px solid ${({ theme }) => theme.palette.border.alternative};
   padding: 2rem 0 1.5rem;
 `;
 

@@ -15,6 +15,15 @@ const securityMiddleware = (store) => (next) => async (action) => {
         return store.dispatch(actions.fetchUserFailure());
       }
 
+    case ACTION_TYPES.UPDATE_USER_INFO_REQUEST:
+      try {
+        const response = await api.profile().updateMe(action.payload);
+
+        return store.dispatch(actions.updateUserSuccess(response.data.body));
+      } catch (e) {
+        return store.dispatch(actions.updateUserFailure());
+      }
+
     default:
       break;
   }

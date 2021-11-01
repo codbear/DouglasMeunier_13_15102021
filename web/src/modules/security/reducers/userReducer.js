@@ -24,6 +24,15 @@ export default function userReducer(state = initialState, action) {
       };
     }
 
+    case ACTION_TYPES.UPDATE_USER_INFO_SUCCESS:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          ...action.payload,
+        },
+      };
+
     default:
       return state;
   }

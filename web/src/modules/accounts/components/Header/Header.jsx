@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
 import { TYPOGRAPHY, Typography } from '../../../theme';
 import { BUTTON, Button, TextField } from '../../../forms';
+import { userActions } from '../../../security';
 
 const propTypes = {
   firstName: PropTypes.string.isRequired,
@@ -37,9 +39,11 @@ const EditFormButton = styled(Button)`
 
 const Header = ({ firstName, lastName }) => {
   const [isEditMode, setIsEditMode] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    console.log(values);
+    dispatch(userActions.updateUserRequest(values));
+
     setIsEditMode(false);
   };
 

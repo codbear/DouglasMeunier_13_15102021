@@ -4,12 +4,14 @@ import styled from 'styled-components';
 import TYPOGRAPHY from '../constants/typography';
 
 const propTypes = {
+  className: PropTypes.string,
   variant: PropTypes.oneOf(Object.values(TYPOGRAPHY)),
   component: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p']),
   srOnly: PropTypes.bool,
 };
 
 const defaultProps = {
+  className: '',
   variant: TYPOGRAPHY.DEFAULT,
   component: 'p',
   srOnly: false,
@@ -53,22 +55,18 @@ const variantToComponent = {
   [TYPOGRAPHY.DEFAULT]: Default,
 };
 
-/**
- * @desc Use to render text.
- * @param {string} variant - Change styles of the component.
- * @param {string} component="p" - Change HTML element used to wrap the text node.
- * @param {boolean} srOnly - If true, text will be only readable by screen readers.
- * @param {JSX.Element} children - Text node.
- * @return {JSX.Element}
- */
-const Typography = ({ variant, component, srOnly, children }) => {
+const Typography = ({ variant, component, srOnly, children, ...otherProps }) => {
   if (srOnly) {
-    return <SROnly as={component} />;
+    return <SROnly as={component} {...otherProps} />;
   }
 
   const ComponentToRender = variantToComponent[variant] || variantToComponent[TYPOGRAPHY.DEFAULT];
 
-  return <ComponentToRender as={component}>{children}</ComponentToRender>;
+  return (
+    <ComponentToRender as={component} {...otherProps}>
+      {children}
+    </ComponentToRender>
+  );
 };
 
 Typography.propTypes = propTypes;

@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from '../../../forms';
+import { Typography } from '../../../theme';
 
 const propTypes = {
   title: PropTypes.string.isRequired,
   amount: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };
-
-const defaultProps = {};
 
 const AccountCardRoot = styled.section`
   display: flex;
@@ -39,20 +38,20 @@ const AccountCardContent = styled.div`
   }
 `;
 
-const AccountTitle = styled.h3`
+const AccountTitle = styled(Typography)`
   margin: 0;
   padding: 0;
   font-size: 1rem;
   font-weight: normal;
 `;
 
-const AccountAmount = styled.p`
+const AccountAmount = styled(Typography)`
   margin: 0;
   font-size: 2.5rem;
   font-weight: bold;
 `;
 
-const AccountAmountDescription = styled.p`
+const AccountAmountDescription = styled(Typography)`
   margin: 0;
 `;
 
@@ -66,7 +65,7 @@ const AccountCard = ({ title, amount, description }) => {
   return (
     <AccountCardRoot>
       <AccountCardContent>
-        <AccountTitle>{title}</AccountTitle>
+        <AccountTitle component="h3">{title}</AccountTitle>
         <AccountAmount>{amount}</AccountAmount>
         <AccountAmountDescription>{description}</AccountAmountDescription>
       </AccountCardContent>
@@ -78,6 +77,5 @@ const AccountCard = ({ title, amount, description }) => {
 };
 
 AccountCard.propTypes = propTypes;
-AccountCard.defaultProps = defaultProps;
 
 export default AccountCard;

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { ROUTES } from '../../../../router';
-import { TYPOGRAPHY, Typography } from '../../../theme';
+import { Typography } from '../../../theme';
 import argentBankLogo from '../../images/argentBankLogo.png';
 import { securityActions } from '../../../security';
 

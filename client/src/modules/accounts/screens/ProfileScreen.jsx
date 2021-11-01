@@ -1,7 +1,7 @@
 import { Redirect } from 'react-router-dom';
 
 import Header from '../components/Header';
-import { TYPOGRAPHY, Typography } from '../../theme';
+import { Typography } from '../../theme';
 import AccountCard from '../components/AccountCard';
 import { useCurrentUser } from '../../security';
 import { ROUTES } from '../../../router';

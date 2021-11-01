@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
-import { TYPOGRAPHY, Typography } from '../../../theme';
+import { Typography } from '../../../theme';
 import { BUTTON, Button, TextField } from '../../../forms';
 import { userActions } from '../../../security';
 

@@ -6,7 +6,7 @@ import { Formik, Form } from 'formik';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { TYPOGRAPHY, Typography } from '../../theme';
+import { Typography } from '../../theme';
 import { Button, Checkbox, TextField } from '../../forms';
 import securityActions from '../actions/securityActions';
 import { ROUTES } from '../../../router';

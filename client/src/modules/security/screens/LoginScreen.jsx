@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Typography } from '../../theme';
 import { Button, Checkbox, TextField } from '../../forms';
-import securityActions from '../actions/securityActions';
+import { loginRequest } from '../actions';
 import { ROUTES } from '../../../router';
 import useCurrentUser from '../hooks/useCurrentUser';
 
@@ -31,7 +31,7 @@ const LoginScreen = () => {
     rememberMe: '',
   };
 
-  const handleSubmit = (values) => dispatch(securityActions.login(values));
+  const handleSubmit = (values) => dispatch(loginRequest(values.email, values.password));
 
   useEffect(() => {
     if (currentUser?.id) {

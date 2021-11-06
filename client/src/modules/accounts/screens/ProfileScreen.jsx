@@ -15,7 +15,7 @@ const ProfileScreen = () => {
 
   return (
     <>
-      <Header firstName={currentUser?.firstName} lastName={currentUser?.lastName} />
+      <Header firstName={currentUser.firstName} lastName={currentUser.lastName} />
       <Typography component="h2" srOnly>
         Accounts
       </Typography>

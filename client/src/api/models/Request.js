@@ -4,18 +4,6 @@ import axios from 'axios';
  * @typedef {"GET"|"POST"|"PATCH"|"PUT"|"DELETE"} HTTPMethod
  */
 
-/**
- * @desc Return an URIComponent encoded string.
- * @param {Object.<string>} jsObject - An object containing multiple values.
- * @returns {string} - The encoded string.
- * @example serialized({ 'foo': 'bar', 'bar': 'foo' });
- */
-function serialized(jsObject) {
-  return Object.keys(jsObject)
-    .map((param) => `${param}=${encodeURIComponent(jsObject[param])}`)
-    .join('&');
-}
-
 export default class Request {
   /**
    * @param {string} baseURL - The root url of the API
@@ -55,11 +43,6 @@ export default class Request {
     /**
      * @type {Object.<string>}
      */
-    this.queryParams = {};
-
-    /**
-     * @type {Object.<string>}
-     */
     this.routeParams = {};
   }
 
@@ -90,19 +73,6 @@ export default class Request {
    */
   setBodyParams(body) {
     Object.assign(this.body, body);
-
-    return this;
-  }
-
-  /**
-   * @public
-   * @desc Define query params.
-   * @param {Object.<string>} queryParams - An object containing multiple values.
-   * @return {Request} - This request.
-   * @example request.setQueryParams({ 'foo': 'bar', 'bar': 'foo' });
-   */
-  setQueryParams(queryParams) {
-    Object.assign(this.queryParams, queryParams);
 
     return this;
   }
@@ -150,31 +120,13 @@ export default class Request {
 
   /**
    * @private
-   * @desc Get serialized query params.
-   * @return {string} - The serialized query params.
-   * @example request.getSerializedQueryParams();
-   */
-  getSerializedQueryParams() {
-    return serialized(this.queryParams);
-  }
-
-  /**
-   * @private
    * @desc Return request URL with correct route and query params.
    * @return {string} - The request URL.
    * @example const url = this.getUrl();
    */
   getUrl() {
-    let url = this.endpoint.replace(/\/:([a-zA-Z0-9_]+)/gi, ($0, $1) =>
+    return this.endpoint.replace(/\/:([a-zA-Z0-9_]+)/gi, ($0, $1) =>
       this.routeParams[$1] ? `/${this.routeParams[$1]}` : ''
     );
-
-    const queryParams = this.getSerializedQueryParams();
-
-    if (queryParams) {
-      url += `?${queryParams}`;
-    }
-
-    return url;
   }
 }

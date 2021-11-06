@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ROUTES } from '../../../../router';
 import { Typography } from '../../../theme';
 import argentBankLogo from '../../images/argentBankLogo.png';
-import { securityActions } from '../../../security';
+import { logoutRequest } from '../../../security';
 
 const MainNav = styled.nav`
   display: flex;
@@ -56,7 +56,7 @@ const Header = ({ user }) => {
             <NavItem to={ROUTES.PROFILE.INDEX}>
               <FontAwesomeIcon icon="user-circle" /> {user.firstName}
             </NavItem>
-            <NavItem to={ROUTES.HOME} onClick={() => dispatch(securityActions.logout())}>
+            <NavItem to={ROUTES.HOME} onClick={() => dispatch(logoutRequest())}>
               <FontAwesomeIcon icon="sign-out-alt" /> Sign Out
             </NavItem>
           </>

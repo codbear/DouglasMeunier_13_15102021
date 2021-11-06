@@ -6,7 +6,7 @@ import { Formik, Form } from 'formik';
 
 import { Typography } from '../../../theme';
 import { BUTTON, Button, TextField } from '../../../forms';
-import { userActions } from '../../../security';
+import { updateUserRequest } from '../../../security';
 
 const propTypes = {
   firstName: PropTypes.string.isRequired,
@@ -42,7 +42,7 @@ const Header = ({ firstName, lastName }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    dispatch(userActions.updateUserRequest(values));
+    dispatch(updateUserRequest(values.firstName, values.lastName));
 
     setIsEditMode(false);
   };

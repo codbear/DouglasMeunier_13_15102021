@@ -9,7 +9,7 @@ basePath: /api/v2
 schemes:
   - http
 paths:
-  /login:
+  /access-token:
     post:
       tags:
         - Auth
@@ -35,7 +35,7 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /register:
+  /users:
     post:
       tags:
         - Auth
@@ -330,14 +330,9 @@ definitions:
         type: string
         example: dollar
   TransactionsResponse:
-    type: object
-    properties:
-      account:
-        $ref: "#/definitions/Account"
-      transactions:
-        type: array
-        items:
-          $ref: "#/definitions/Transaction"
+      type: array
+      items:
+        $ref: "#/definitions/Transaction"
   Transaction:
     type: object
     properties:
@@ -351,6 +346,10 @@ definitions:
         type: number
         format: float
         example: 3
+      account_balance:
+        type: number
+        format: float
+        example: 2082.79
       type:
         type: string
         example: credit card
@@ -362,8 +361,6 @@ definitions:
       created_at:
         type: string
         example: "2021-10-17 12:34:55"
-      account:
-        $ref: "#/definitions/Account"
   PartialTransaction:
     type: object
     properties:
